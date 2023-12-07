@@ -7,10 +7,26 @@ from datetime import datetime
 class BaseModel():
     """a representation of a base"""
 
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+    def __init__(self, *args, **kwargs):
+
+        if len(kwargs) > 0:
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    """ This code is to set the created_at and updated_at as datetime objects"""
+
+                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                elif key == '__class__':
+                    continue
+                else:
+                    """ This is to set other values as usual using setattr method"""
+
+                    setattr(self, key, value)
+        else:
+            """this creates a usual class instance as used earlier"""
+
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         return "[{}] ({}) {}".format(
