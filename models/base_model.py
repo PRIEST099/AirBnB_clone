@@ -2,6 +2,7 @@
 """a model representing a base through a class"""
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel():
@@ -12,13 +13,16 @@ class BaseModel():
         if len(kwargs) > 0:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
-                    """ This code is to set the created_at and updated_at as datetime objects"""
+                    """set the created_at and updated_at as datetime objects"""
 
-                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(self,
+                            key,
+                            datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                            )
                 elif key == '__class__':
                     continue
                 else:
-                    """ This is to set other values as usual using setattr method"""
+                    """set other values as usual using setattr method"""
 
                     setattr(self, key, value)
         else:
@@ -27,6 +31,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         return "[{}] ({}) {}".format(
@@ -37,6 +42,7 @@ class BaseModel():
     def save(self):
         """updates the updated_at variable"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """returns a dictionary representation of the class"""
@@ -48,4 +54,3 @@ class BaseModel():
         obj['updated_at'] = self.updated_at.isoformat()
 
         return obj
-
