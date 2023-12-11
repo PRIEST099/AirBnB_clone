@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 '''Command Interpreter'''
 import cmd
+import re
 import shlex 
 import models 
 from datetime import datetime
