@@ -13,7 +13,7 @@ from tests import clear_stream
 class TestHBNBCommand(unittest.TestCase):
     """Unit tests for the HBNBCommand class."""
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'FileStorage test')
+    @unittest.skipIf(os.getenv('') == 'db', 'FileStorage test')
     def test_fs_create(self):
         """Test the create command using FileStorage."""
         with patch('sys.stdout', new=StringIO()) as cout:
@@ -39,18 +39,17 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertIn("'age': 17", cout.getvalue().strip())
             self.assertIn("'height': 5.9", cout.getvalue().strip())
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'DBStorage test')
+    @unittest.skipIf(os.getenv('') != 'db', '')
     def test_db_create(self):
         """Test the create command using Database Storage."""
         with patch('sys.stdout', new=StringIO()) as cout:
             console = HBNBCommand()
 
-            # Raise an exception if creating User instance with missing attributes
             with self.assertRaises(Exception):
                 console.onecmd('create User')
             clear_stream(cout)
 
-            console.onecmd('create User email="john25@gmail.com" password="123"')
+            console.onecmd('create User email=')
             model_id = cout.getvalue().strip()
 
             user = storage.get(User, model_id)

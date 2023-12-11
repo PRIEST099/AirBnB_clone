@@ -137,7 +137,7 @@ class TestAmenity_save(unittest.TestCase):
 
 
 class TestAmenity_to_dict(unittest.TestCase):
-    """Unittests for testing out a function to_dict method of the Amenity class."""
+"""Unittests for testing out amenity class."""
 
     def test_to_dict_type(self):
         self.assertTrue(dict, type(Amenity().to_dict()))

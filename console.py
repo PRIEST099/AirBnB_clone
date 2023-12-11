@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-'''Method Command Interpreter'''
+'''Command Interpreter'''
 import cmd
-import shlex
-import models
+import re
+import shlex import split
+import models import storage
 from datetime import datetime
 from models.base_model import BaseModel
 from models import storage
@@ -157,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
                     return None
 
     def do_quit(self, args):
-        '''<Quit> Command To Exit The Program'''
+        '''<Quit> Exit The Program'''
         return True
 
     def do_EOF(self, args):
@@ -166,7 +167,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         '''dont execute anything when user
-           press enter an empty line
+           press enter an empty line by choice or mistake
         '''
         pass
 

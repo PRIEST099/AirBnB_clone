@@ -13,13 +13,13 @@ from tests import clear_stream
 class TestHBNBCommand(unittest.TestCase):
     """Unit tests for the HBNBCommand class."""
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'FileStorage test')
+@unittest.skipIf(os.getenv('HBNB') == 'db', 'FileStorage test')
     def test_fs_create(self):
         """Test the create command using FileStorage."""
         with patch('sys.stdout', new=StringIO()) as cout:
             console = HBNBCommand()
-            console.onecmd('create City name="Texas"')
-            model_id = cout.getvalue().strip()
+            console.onecmd()
+            model_id = cou.getvalue().strip()
             clear_stream(cout)
 
             # Check if instance is stored in FileStorage
@@ -45,12 +45,12 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as cout:
             console = HBNBCommand()
 
-            # Raise an exception if creating User instance with missing attributes
+# creating User instance with missing attributes
             with self.assertRaises(Exception):
                 console.onecmd('create User')
             clear_stream(cout)
 
-            console.onecmd('create User email="john25@gmail.com" password="123"')
+            console.onecmd('create User email')
             model_id = cout.getvalue().strip()
 
             user = storage.get(User, model_id)
@@ -58,7 +58,7 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertEqual(user.email, "john25@gmail.com")
             self.assertEqual(user.password, "123")
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'DBStorage test')
+    @unittest.skipIf(os.getenv() != 'db', 'DBStorage test')
     def test_db_show(self):
         """Test the show command using Database Storage."""
         with patch('sys.stdout', new=StringIO()) as cout:
