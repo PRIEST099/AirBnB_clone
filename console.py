@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 '''Command Interpreter'''
 import cmd
-import re
-import shlex import split
-import models import storage
+import shlex 
+import models 
 from datetime import datetime
 from models.base_model import BaseModel
 from models import storage
