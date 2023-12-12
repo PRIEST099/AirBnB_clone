@@ -13,5 +13,5 @@ create the first abstracted storage engine of the project: File storage.
 create all unittests to validate all our classes and storage engine
 contributors
 UMUTONI Kevine "simplykevine" <umutonikevine2004@gmail.com>
-CYIZERE Ahadi "PRIEST099" <hadic044@gmail.com>
+CYIZERE Ahadi "PRIEST099" <ahadic044@gmail.com>
 DATE: from 6th-12th/ DEC/2023
